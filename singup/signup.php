@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Signup </title>
+</head>
+<body>
+    <form action="index.php" method="post">
+        <label for="name"> Nombre: </label>
+        <input type="text" id="name" name="name">
+        <br>
+
+        <label for="email"> Email: </label>
+        <input type="text" id="email" name="email">
+        <br>
+
+        <label for="pass"> Contraseña: </label>
+        <input type="password" id="pass" name="pass">
+        <br>
+
+        <laber for="pass"> Repite la contraseña: </laber>
+        <input type="password" id="pass2" name="pass2">
+        <br>
+
+        <label for="age"> Edad: </label>
+        <input type="number" id="age" name="age">
+        <br>
+
+
+        <p> Cursos: </p>
+        <input type="checkbox" id="daw" name="studies" value="DAW">
+        <label for="daw"> DAW </label>
+        <br>
+
+        <input type="checkbox" id="dam" name="studies" value="DAM">
+        <label for="dam"> DAM </label>
+        <br>
+
+        <input type="checkbox" id="asir" name="studies" value="ASIR">
+        <label for="asir"> ASIR </label>
+        <br>
+
+        <input type="submit" name="enviar" value="Enviar">
+    </form>
+</body>
+</html>
