@@ -29,19 +29,19 @@
 
 
         <p> Cursos: </p>
-        <input type="checkbox" id="daw" name="studies" value="DAW">
+        <input type="checkbox" id="daw" name="studies[]" value="DAW">
         <label for="daw"> DAW </label>
         <br>
 
-        <input type="checkbox" id="dam" name="studies" value="DAM">
+        <input type="checkbox" id="dam" name="studies[]" value="DAM">
         <label for="dam"> DAM </label>
         <br>
 
-        <input type="checkbox" id="asir" name="studies" value="ASIR">
+        <input type="checkbox" id="asir" name="studies[]" value="ASIR">
         <label for="asir"> ASIR </label>
         <br>
 
-        <input type="submit" name="enviar" value="Enviar">
+        <input type="submit" name="enviar" value="Enviar datos">
     </form>
 </body>
 </html>

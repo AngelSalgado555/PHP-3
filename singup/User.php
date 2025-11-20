@@ -11,7 +11,9 @@ class User{
 
     
     public function __tostring(){
-        return "<b>Nombre: </b>" . $this -> name . "<br><b> Email: </b>" . $this -> email . "<br><b> Contraseña: </b>" . $this -> pass . "<br><b>Edad: </b>" . $this -> age . "<br><b> Sus estudios: </b>" . implode(", ",  $this -> studies); 
+        return "<b>Nombre: </b>" . $this -> name . "<br><b> Email: </b>" . $this -> email . "<br><b> Contraseña: 
+        </b>" . $this -> pass . "<br><b>Edad: </b>" . $this -> age . "<br><b> Sus estudios: </b>" . 
+        implode(", ",  $this -> studies); 
     }
 
         /**
