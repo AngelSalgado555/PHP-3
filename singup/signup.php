@@ -6,7 +6,7 @@
     <title> Signup </title>
 </head>
 <body>
-    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+    <form action="index.php" method="post">
         <label for="name"> Nombre: </label>
         <input type="text" id="name" name="name">
         <br>
