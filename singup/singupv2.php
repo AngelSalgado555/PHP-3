@@ -1,18 +1,37 @@
 <?php
+session_start();
 
+//Declarar variables
 $name = $email = $pass = $pass2 = "";
 $age = 0;
 $studies = [];
 $errors = false;
 $passError = "";
+
+function secure($text){
+    //Quitar espacios de delante y detrás del texto
+    $text = trim($text);
+
+    //Escapar carácteres especiales
+    $text = stripslashes($text);
+
+    //Carácteres especiales de HTML
+    $text = htmlspecialchars($text);
+
+    // ^^ Se puede hacer de esta manera también: 
+    //$text = htmlspecialchars(stripslashes(trim($text)));
+
+    return $text;
+}
     //Comprobaciones del formulario: 
         if ($_SERVER['REQUEST_METHOD'] == "POST"){
             // echo "Hola";
-            $name = $_POST["name"];
-            $pass = $_POST["pass"];
-            $pass2 = $_POST["pass2"];
-            $email = $_POST["email"];
-            $age = $_POST["age"];
+            $name = secure($_POST["name"]);
+            $pass = secure($_POST["pass"]);
+            $pass2 = secure($_POST["pass2"]);
+            $email = secure($_POST["email"]);
+            $age = secure($_POST["age"]);
+
             if (isset($_POST["studies"])){
                 $studies = $_POST["studies"];
                 var_dump($studies);
@@ -24,10 +43,24 @@ $passError = "";
                 $passError = "Las contraseñas no coinciden";
                 echo "Estoy en el if de contraseña";
             } else {
+                //Guardo en la sesión los datos que quiero pasar: 
+                $_SESSION["name"] = $name;
+                $_SESSION["email"] = $email;
+                $_SESSION["pass"] = $pass;
+                $_SESSION["age"] = $age;
+                $_SESSION["studies"] = $studies;
+
+                //Le puedo meter otra información 
+                $_SESSION["origin"] = "signupv2";
+
                 //Me voy al index
                 header("Location: indexv2.php");
+
+                exit(); //Con esto se termina el script, no se ejecuta nada más.
             }
         }
+
+    
 ?> 
 
 <!DOCTYPE html>
