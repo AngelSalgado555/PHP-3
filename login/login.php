@@ -11,7 +11,7 @@ $errores = false;
         $name = secure($_POST["name"]);
         // var_dump($name);
         $pass = secure($_POST["pass"]);
-        var_dump($_POST);
+        // var_dump($_POST);
 
         if (isset($_POST["terms"])){
             $terms = $_POST["terms"];
