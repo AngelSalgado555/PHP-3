@@ -9,8 +9,9 @@ $errores = false;
     if ($_SERVER['REQUEST_METHOD'] == "POST"){
         include $_SERVER['DOCUMENT_ROOT'] . "/login/utils.php";
         $name = secure($_POST["name"]);
+        // var_dump($name);
         $pass = secure($_POST["pass"]);
-        //var_dump($_POST);
+        var_dump($_POST);
 
         if (isset($_POST["terms"])){
             $terms = $_POST["terms"];
@@ -32,7 +33,7 @@ $errores = false;
             $_SESSION["terms"] = $terms;
             $_SESSION["test"] = 45.9; //Este no vale para nada
             //Redirijo: 
-            header("Location: indexprovisional.php");
+            header("Location: ../indexv2.php");
             //Termino el script 
             exit();
 
@@ -47,7 +48,7 @@ $errores = false;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link src="formulario.php" rel="stylesheet">
+    <link rel="stylesheet" href="../formulario.css" >
 
 </head>
 <body>
