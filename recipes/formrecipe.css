@@ -42,6 +42,8 @@ body{
 .formulario input[type="checkbox"],
 .formulario input[type="radio"] {
     margin-left: -50px;
+    
+    
 }
 
 .formulario input[type="submit"],
@@ -50,6 +52,9 @@ body{
     margin: 5px 0;
     border: 2px solid black;
     border-radius: 4px;
-    cursor: pointer;
     font-weight: bold;
+}
+
+.errorGluten{
+    color: red;
 }

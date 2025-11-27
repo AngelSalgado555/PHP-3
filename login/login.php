@@ -32,6 +32,8 @@ $errores = false;
             $_SESSION["origin"] = "login"; //Viene bien para saber de donde se viene
             $_SESSION["terms"] = $terms;
             $_SESSION["test"] = 45.9; //Este no vale para nada
+            //Hago lo de la cookie de permanecer registrado: 
+            setcookie("logged", $name, time()+30*24*60*60, "/"); //Un mes
             //Redirijo: 
             header("Location: ../indexv2.php");
             //Termino el script 
@@ -67,6 +69,9 @@ $errores = false;
         <?= "<p class='error'>" . $termsError . "</p>" ?>
         <br>
 
+        <input type="checkbox" name="logged" id="logged">
+        <label for="logged"> Quiero permanecer aquí </label>
+        <br>
         <input type="submit" value="Entrar">
     </form>
 </body>

@@ -5,3 +5,4 @@ function secure($text){
 
     return $text;
 }
+
