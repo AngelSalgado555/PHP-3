@@ -94,8 +94,6 @@
     $t = new Tree(20.0, 1.8, "diamante");
 
     
-
-
     ?>
 </body>
 </html>
