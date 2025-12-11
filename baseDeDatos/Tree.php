@@ -8,6 +8,11 @@ class Tree{
         private int $id = -1
     ){}
 
+    public function __tostring(){
+        $ret = "El id es: " . $this->id . ", el precio es: " . $this->price . ", el tamaño es: " . $this->height . ", y el material es: " . $this->material;
+        return $ret;    
+    }
+
     /**
      * Inserta en la base de datos el árbol
      * @param Tree $tree árbol a insertar en la bd
