@@ -10,41 +10,53 @@ class Component{
     ){}
 
     public function __tostring(){
-        $ret = "El id es: " . $this->id . ", el nombre es: " . $this->name . ", la marca es: " . $this->brand . ", y el modelo es: " . $this->model;
+        $ret = "El id es: " . $this -> id . ", el nombre es: " . $this -> name . ", la marca es: " . $this -> brand . ", y el modelo es: " . $this -> model;
         return $ret;
     }
 
+    
 
-    public static function insert($c, $conn):int{
-        $sql = "INSERT INTO components (name, brand, model) VALUES (\"$c->name\", \"$c->brand\", \"$c->model\")";
-        $conn -> query($sql);
-        $id = $conn -> insert_id;
-        $c->id = $id;
-        return $id;
-    }
-
-    public static function read($id, $conn): ?Component{
-        $sql = "SELECT * FROM components WHERE id = $id";
-        $row = $conn -> query($sql);
-        if ($row->num_rows > 0){
-            $row->fetch_assoc();
-            $c = new Component($row["name"], $row["brand"], $row["model"], $row["id"]);
-            return $c;
-        } else {
-            return null;
+        /**
+         * Get the value of name
+         */ 
+        public function getName()
+        {
+                return $this->name;
         }
-    }
 
-    public static function update($c, $conn): bool{
-        
-    }
+        /**
+         * Get the value of brand
+         */ 
+        public function getBrand()
+        {
+                return $this->brand;
+        }
 
-    public static function delete($id, $conn): Component{
+        /**
+         * Get the value of model
+         */ 
+        public function getModel()
+        {
+                return $this->model;
+        }
 
-    }
+        /**
+         * Get the value of id
+         */ 
+        public function getId()
+        {
+                return $this->id;
+        }
 
-    public static function readAll($id, $conn): Component{
+        /**
+         * Set the value of id
+         *
+         * @return  self
+         */ 
+        public function setId($id)
+        {
+                $this->id = $id;
 
-    }
-
+                return $this;
+        }
 }
