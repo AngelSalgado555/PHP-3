@@ -11,7 +11,7 @@ class PcDAO{
      * @param Pc $pc
      * @return bool true si lo ha insertado, false si no lo ha insertado.
      */
-    private static function create($pc):bool{
+    public static function create($pc):bool{
         //todo
         $conn = CoreDB::getConnection();
         $sql = "INSERT into pcs (id, owner, brand, price)
@@ -33,13 +33,13 @@ class PcDAO{
 
         /*Guardo los componentes en la bd:  */
         foreach($pc -> getComponents() as $component){
-            ComponentDAO::create($component);
+            ComponentDAO::create($component, $id);
         }
 
         // /*Cierro conexion */
-        // $conn -> close();
+        $conn -> close();
 
-        // return $ret;
+        return $ret;
     }
 
     /**
@@ -48,22 +48,47 @@ class PcDAO{
      * @param string $id
      * @return Pc Pc leído de la bd o null si no existe el id.
      */
-    private static function read($id): ?Pc{
-        //todo
-        return null;
+    public static function select($id): ?Pc{
+        $conn = CoreDB::getConnection();
+        $sql = "SELECT * FROM pcs WHERE id = ?";
+        $ps = $conn -> prepare($sql);
+
+        $ps -> bind_param("s", $id);
+        $ps -> execute();
+
+        $result = $ps -> get_result();
+        //En result tengo el objeto mysql _result con la información leída de la BD
+        if ($result -> num_rows > 0){
+            $row = $result -> fetch_assoc();
+            $pc = new Pc(
+                $id, 
+                $row["owner"], 
+                $row["brand"],
+                $row["price"]
+            );
+
+            //Ahora tengo que leer los componentes donde su pc_id sea el de este pc: 
+
+        } else {
+            $pc = null;
+        }
+
+
+        $conn -> close();
+        return $pc;
     }
 
-    private static function update($pc): bool{
+    public static function update($pc): bool{
         //todo
         return false;
     }
 
-    private static function delete($id): ?Pc{
+    public static function delete($id): ?Pc{
         //todo
         return null;
     }
 
-    private static function readAll(){
+    public static function readAll(){
         //todo
     }
 
@@ -73,7 +98,7 @@ class PcDAO{
      * @param mixed $max precio máximo
      * @return array Array con los pcs 
      */
-    private static function readBetweenPrice($min, $max){
+    public static function readBetweenPrice($min, $max){
         //todo
 
 

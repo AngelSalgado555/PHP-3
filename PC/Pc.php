@@ -9,6 +9,10 @@ class Pc{
         private array $components = []
     ){}
 
+    public function addComponent ($c ){
+        $this -> components[] = $c;
+    }
+
         /**
          * Get the value of id
          */ 

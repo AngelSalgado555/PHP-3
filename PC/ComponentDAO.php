@@ -22,16 +22,26 @@ class ComponentDAO
 
         $sql = "INSERT INTO components (name, brand, model, pc_id) VALUES (?, ?, ?, ?);";
         $ps = $conn->prepare($sql);
-        //Hago el bind 
-
+        //Hago el bind (asignar valores a los ?)
+        $name = $c->getName();
+        $brand = $c -> getBrand();
+        $model = $c -> getModel();
+        
+        $ps -> bind_param("ssss", $name, $brand, $model, $pc_id);
 
         //Ejecuto la query
+        $ps -> execute();
 
 
         //Obtengo el id con el que se ha insertado 
+        $id = $ps -> insert_id;
+        $c -> setId($id);
 
+        //Cerrar conexión
+        $conn -> close();
         
         //Return
+        return $id;
     }
 
     /**
@@ -48,7 +58,6 @@ class ComponentDAO
         $result = $conn->query($sql);
         $conn->close();
         if (($row = $result->fetch_assoc()) != null) {
-
             return new Component(
                 $row["name"],
                 $row["brand"],
@@ -123,5 +132,14 @@ class ComponentDAO
         }
         $conn->close();
         return $arr;
+    }
+
+    public static function selectByPcId($id){
+        $conn = CoreDB::getConnection();
+        
+
+
+        $conn -> close();
+        return ;
     }
 }
