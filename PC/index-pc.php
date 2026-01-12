@@ -8,6 +8,7 @@
 <body>
     <?php
         require_once $_SERVER['DOCUMENT_ROOT'] . "/PC/PcDAO.php";
+        require_once $_SERVER['DOCUMENT_ROOT'] . "/PC/UserDAO.php";
 
         // $pc = new Pc("asus129", "andrea", "Asus", 1364.1);
 
@@ -22,7 +23,17 @@
         // //Lo añado a la BD
         // PcDAO::create($pc);
 
-        echo PcDAO::select("asus129");
+        // echo PcDAO::select("asus129");
+
+        $u = new User("sete", "admin12345678-:!");
+        $u2 = new User("diego", "a");
+
+        // UserDAO::create($u);
+        // UserDAO::create($u2);
+
+        echo UserDAO::verifyPassword("sete", "admin12345678-:!"); 
+        echo UserDAO::verifyPassword("diego", "ashdhfasjkd");
+        echo UserDAO::verifyPassword("angel", "pepito");
     ?>
 </body>
 </html>
