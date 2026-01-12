@@ -29,15 +29,24 @@ class PcDAO{
         $ps -> bind_param("sssd", $id, $owner, $brand, $price);
 
         /*Ejecuto la sentencia */
-        $ret = $ps->execute();
+        try{
+            $ret = $ps->execute();
 
-        /*Guardo los componentes en la bd:  */
-        foreach($pc -> getComponents() as $component){
-            ComponentDAO::create($component, $id);
+            /*Guardo los componentes en la bd:  */
+            foreach($pc -> getComponents() as $component){
+                ComponentDAO::create($component, $id);
+            }
+        }catch (mysqli_sql_exception $e){   //Alternativa } catch(Exception $e){
+            //return $e -> getMessage();  //Aquí devolvería el mensaje asociado a la excepción
+            $conn -> close();
+            return false;
         }
+        
+
+        
 
         // /*Cierro conexion */
-        $conn -> close();
+        
 
         return $ret;
     }
@@ -81,8 +90,14 @@ class PcDAO{
         return false;
     }
 
+    /**
+     * Elimina un pc de la base de datos <strong> junto con todos sus componentes </strong>
+     * @param string $id id del pc que quiero eliminar
+     * @return  PC | null objeto pc eliminado 
+     */
     public static function delete($id): ?Pc{
         //todo
+        
         return null;
     }
 
