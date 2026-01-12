@@ -9,18 +9,20 @@
     <?php
         require_once $_SERVER['DOCUMENT_ROOT'] . "/PC/PcDAO.php";
 
-        $pc = new Pc("asus129", "andrea", "Asus", 1364.1);
+        // $pc = new Pc("asus129", "andrea", "Asus", 1364.1);
 
-        $c1 = new Component("ssd", "samsung", "58H");
-        $c2 = new Component("ram", "samsung", "W56");
-        $c3 = new Component("mouse", "logitech", "asd");
+        // $c1 = new Component("ssd", "samsung", "58H");
+        // $c2 = new Component("ram", "samsung", "W56");
+        // $c3 = new Component("mouse", "logitech", "asd");
 
-        $pc -> addComponent($c1);
-        $pc -> addComponent($c2);
-        $pc -> addComponent($c3);
+        // $pc -> addComponent($c1);
+        // $pc -> addComponent($c2);
+        // $pc -> addComponent($c3);
 
-        //Lo añado a la BD
-        PcDAO::create($pc);
+        // //Lo añado a la BD
+        // PcDAO::create($pc);
+
+        echo PcDAO::select("asus129");
     ?>
 </body>
 </html>

@@ -13,6 +13,11 @@ class Pc{
         $this -> components[] = $c;
     }
 
+    public function __tostring(){
+        $rel = "El id del PC es: " . $this->id . ", Propietario: " . $this -> owner . ", Marca: " . $this -> brand. ", Precio: " . $this -> price . ", Componentes asociados: " . implode(",", $this -> components); 
+
+        return $rel; 
+    }
         /**
          * Get the value of id
          */ 

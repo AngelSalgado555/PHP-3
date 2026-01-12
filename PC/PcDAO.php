@@ -68,12 +68,10 @@ class PcDAO{
             );
 
             //Ahora tengo que leer los componentes donde su pc_id sea el de este pc: 
-
+            $pc -> setComponents(ComponentDAO::selectByPcId($id));
         } else {
             $pc = null;
         }
-
-
         $conn -> close();
         return $pc;
     }

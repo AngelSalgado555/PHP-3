@@ -10,8 +10,8 @@ class Component{
     ){}
 
     public function __tostring(){
-        $ret = "El id es: " . $this -> id . ", el nombre es: " . $this -> name . ", la marca es: " . $this -> brand . ", y el modelo es: " . $this -> model;
-        return $ret;
+        return "El id es: " . $this -> id . ", el nombre es: " . $this -> name . ", la marca es: " . $this -> brand . ", y el modelo es: " . $this -> model;
+
     }
 
     
