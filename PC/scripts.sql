@@ -32,3 +32,8 @@ delete from shop.components  where id = 99;
 /*Añadir el pc 'pc7' que tiene 3 componentes n1, n2, n3*/
 INSERT INTO shop.pcs (id, owner, brand, price) VALUES ('pc7', 'o', 'b', 150);
 INSERT INTO shop.components (name, brand, model, pc_id) VALUES ('n1', 'b', 'm', 'pc7');
+CREATE TABLE shop.users (
+	id int PRIMARY KEY auto_increment,
+	name varchar(255) unique, 
+	password varchar(255)
+);
