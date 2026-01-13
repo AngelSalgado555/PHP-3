@@ -96,8 +96,23 @@ class PcDAO{
      * @return  PC | null objeto pc eliminado 
      */
     public static function delete($id): ?Pc{
-        //todo
-        
+        //Primero elimino compoonentes asociados (por que la FK está en compoentns) y luego elimino pc
+        $pc = PcDAO::select($id);
+        if ($pc == null){
+            return null;
+        }
+
+        $conn = CoreDB::getConnection();
+        foreach ($pc -> getComponents() as $c){
+            ComponentDAO::delete($c->getId());
+        }
+
+        $sql = "DELETE from pcs WHERE id = ?;";
+        $ps = $conn -> prepare($sql);
+        $ps -> bind_param("s", $id);
+        $ps -> execute();
+
+        $conn -> close();
         return null;
     }
 

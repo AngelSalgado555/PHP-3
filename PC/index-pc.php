@@ -10,7 +10,7 @@
         require_once $_SERVER['DOCUMENT_ROOT'] . "/PC/PcDAO.php";
         require_once $_SERVER['DOCUMENT_ROOT'] . "/PC/UserDAO.php";
 
-        $pc = new Pc("asus555", "angel", "Asus", 1364.1);
+        /*$pc = new Pc("asus555", "angel", "Asus", 1364.1);
 
         $c1 = new Component("ssd", "samsung", "58H");
         $c2 = new Component("ram", "samsung", "W56");
@@ -39,7 +39,9 @@
             echo "Se ha creado correctamente";
         } else {
             echo "No se ha creado correctamente";
-        }
+        }*/
+
+        echo PcDAO::delete("asus129");
     ?>
 </body>
 </html>
