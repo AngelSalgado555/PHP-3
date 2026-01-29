@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Journalist;
 
 class JournalistController extends Controller
 {
@@ -14,12 +15,9 @@ class JournalistController extends Controller
         //Estoy en el index del JounalitsController
         //1. Buscar todos los jounalist de la bd
         $journalists = Journalist::all();
-        return $journalists;
-        foreach($journalists as $j){
-            
-            $ret .= $j; 
-        }
+        
         //2. Devolver una vista que los contenga
+        return view('journalist.index', compact("journalists"));
     }
 
     /**
@@ -48,6 +46,7 @@ class JournalistController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     * Va a devolver una vista con un formulario rellenado con los datos del periodista en cuestión y un botón de Actualizar 
      */
     public function edit(string $id)
     {
