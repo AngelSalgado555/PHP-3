@@ -1,0 +1,14 @@
+<?php
+
+class Journalist{
+    private int $id;
+
+    private string $name;
+
+    private string $surname;
+
+    private string $email;
+
+    private string $password;
+
+}
