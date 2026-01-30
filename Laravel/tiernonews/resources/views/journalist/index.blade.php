@@ -8,6 +8,7 @@
 
 </head>
 <body>
+    @include("components.header");
     <h1 class="bg-info text-success p-2">Journalist</h1>
     <p class="bg-info"> Prueba </p>
     @foreach ($journalists as $j)
