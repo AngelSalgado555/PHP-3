@@ -28,10 +28,10 @@ Route::post("/jounalist", [JournalistController::class, "store"]) -> name('jouna
 Route::get("/journalist/{id}", [JournalistController::class, "show"]);
 
 //Una de tipo de get
-Route::get("/jounalist/{id}", [JournalistController::class, "edit"]);
+Route::get("/jounalist/{id}", [JournalistController::class, "edit"]) -> name('journalist.edit');
 
 //El de tipo put para que haga update
-Route::put("/journalist/{id}", [JournalistController::class, "update"]);
+Route::put("/journalist/{id}", [JournalistController::class, "update"]) -> name('journalist.update');
 
 //De tipo delete para borrar de la base de datos
-Route::delete("/journalist/{id}", [JournalistController::class, "destroy"]);
+Route::delete("/journalist/{id}", [JournalistController::class, "destroy"]) -> name('journalist.destroy');

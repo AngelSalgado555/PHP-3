@@ -28,12 +28,12 @@
                         <!-- Añade un campo hidden con un token imprescindible para que laravel le deje continuar-->
                         <div class="mb-3">
                             <label for="nombre" class="form-label font-weight-bold">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                            <input type="text" class="form-control" id="nombre" name="name" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="apellidos" class="form-label">Apellidos</label>
-                            <input type="text" class="form-control" id="apellidos" name="apellidos" required>
+                            <input type="text" class="form-control" id="apellidos" name="surname" required>
                         </div>
 
                         <div class="mb-3">

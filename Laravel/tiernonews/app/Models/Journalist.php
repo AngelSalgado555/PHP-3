@@ -6,14 +6,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class Journalist extends Model{
-    private int $id;
+    // private int $id;
 
-    private string $name;
+    // private string $name;
 
-    private string $surname;
+    // private string $surname;
 
-    private string $email;
+    // private string $email;
 
-    private string $password;
+    // private string $password;
 
+    protected $fillable = ["id", "name", "surname", "email", "password"];
 }
