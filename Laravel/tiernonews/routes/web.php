@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\JournalistController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,3 +36,5 @@ Route::put("/journalist/{id}", [JournalistController::class, "update"]) -> name(
 
 //De tipo delete para borrar de la base de datos
 Route::delete("/journalist/{id}", [JournalistController::class, "destroy"]) -> name('journalist.destroy');
+
+Route::resource("/article", ArticleController::class);

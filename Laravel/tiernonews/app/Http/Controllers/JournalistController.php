@@ -37,19 +37,26 @@ class JournalistController extends Controller
      */
     public function store(Request $request)
     {
-        //return "ahora te lo guardo";
-        //use Illuminate\Support\Facades\Log;
         //Para acceder a los campos del formulario, simplemente $request->nombre-del-input
         //Equivalente a $request->input("nombre-del-input")
         //Log::channel('stderr')->debug("Variable request: ", [$request->all()]);
         //todo $fillable
         $j = new Journalist($request->all());
-        Log::channel('stderr')->debug("Variable request: ", [$j->name]);
+        Log::channel('stderr')->debug("Variable request: ", [$j->email]);
+
+        //Antes de guardar en la BD: validaciones
+        $request -> validate([
+            'name' => 'required', 
+            'password' => 'min:3|required',
+            'email' => 'unique:journalists,email|required'
+        ]);
+
         //Con la siguiente orden se guarda en la BD:
         $j->save();
         //Para crear el index, tengo que buscar todos los periodistas en la BD
-        $journalists = Journalist::all();
-        return view('journalist.index', compact("journalists"));
+        //$journalists = Journalist::all();
+        //return view('journalist.index', compact("journalists"));
+        return redirect() -> route('journalist.create');
     }
 
     /**

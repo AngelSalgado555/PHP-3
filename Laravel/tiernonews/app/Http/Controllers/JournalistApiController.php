@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Journalist;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class JournalistApiController extends Controller
@@ -17,10 +18,16 @@ class JournalistApiController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * Devuelve JSON con el journalist cread
+     * $request contiene el JSON de la petición POST
      */
     public function store(Request $request)
     {
-        //
+        $j = new Journalist($request -> all());
+        $j -> save();
+
+        return response()-> json($j);
+    
     }
 
     /**
@@ -31,8 +38,19 @@ class JournalistApiController extends Controller
         //1. Busco el journalist con ese id
         $j = Journalist::find($id);
 
-        //2. Lo devuelvo en formato JSON
-        return response() -> json($j);
+        if ($j != null){
+            //2. Lo devuelvo en formato JSON
+            return response() -> json([
+                "message" => "",
+                "data" => $j
+            ]);
+        } else {
+            return response() -> json([
+                "message" => "Journalist not found",
+                "data" => null
+            ], JsonResponse::HTTP_NOT_FOUND); //Esto equivale al error 404 que es no encontrado
+        }
+        
     }
 
     /**
@@ -40,7 +58,23 @@ class JournalistApiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //1. Busco por id
+        $j = Journalist::find($id);
+        if ($j != null){
+            $j -> name = $request -> name; 
+            $j -> surname = $request -> surname;
+            $j -> email = $request -> email; 
+            $j -> update(); 
+            return response() -> json([
+                "message" => "",
+                "data" => $j
+            ]);
+        } else {
+            return response() -> json([
+                "message" => "Not found",
+                "data" => null
+            ], JsonResponse::HTTP_NOT_FOUND); //Esto equivale al error 404 que es no encontrado
+        }
     }
 
     /**
@@ -48,6 +82,18 @@ class JournalistApiController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $j = Journalist::find($id);
+        if ($j != null){
+            $j -> delete();
+            return response() -> json([
+                "message" => "Deleted", 
+                "data" => $j
+            ]);
+        } else {
+            return response() -> json([
+                "message" => "Not found",
+                "data" => null
+            ], JsonResponse::HTTP_NOT_FOUND); //Esto equivale al error 404 que es no encontrado
+        }
     }
 }
