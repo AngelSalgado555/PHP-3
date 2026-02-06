@@ -29,32 +29,45 @@
                     <h5 class="mb-0">Formulario de Creación de Journalist</h5>
                 </div>
                 <div class="card-body p-4">
-                    <form action="{{ route('jounalist.store') }}" method="POST">
+                    <form action="{{ route('journalist.store') }}" method="POST">
                         @csrf
                         <!-- Añade un campo hidden con un token imprescindible para que laravel le deje continuar-->
                         <div class="mb-3">
                             <label for="nombre" class="form-label font-weight-bold">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="name" required>
+                            <input type="text" id="nombre" name="name"
+                            class="form-control @error('name') is-invalid @enderror"
+                            value="{{ old('name') }}">
+                            <!-- old recupera el valor antiguo (si no pasó validación) -->
+                            <!-- ARROBAerror('name') contiene el error (si o había) de validación -->
+                            @error('name') <small class="text-danger"> {{ $message }}</small> @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="apellidos" class="form-label">Apellidos</label>
-                            <input type="text" class="form-control" id="apellidos" name="surname" required>
+                            <input type="text" id="apellidos" name="surname" 
+                            class="form-control @error('surname') is-invalid @enderror"
+                            value="{{ old('surname') }}">
+                            @error('surname') <small class="text-danger"> {{ $message }} </small>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                            <input type="email" id="email" name="email" 
+                            class="form-control @error('email') is-invalid @enderror"
+                            value="{{ old('email') }}">
+                            @error('email') <small class="text-danger"> {{ $message }} </small>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="password" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
+                            <input type="password" class="form-control" id="password" name="password" >
                         </div>
 
                         <div class="mb-4">
                             <label for="repite_password" class="form-label">Repite la contraseña</label>
-                            <input type="password" class="form-control" id="repite_password" name="repite_password" required>
+                            <input type="password" class="form-control" id="repite_password" name="password_confirmation" >
                         </div>
 
                         <div class="d-grid">

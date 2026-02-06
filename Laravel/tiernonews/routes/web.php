@@ -16,15 +16,15 @@ Route::get("/hola{name} ", function($name){
     return "Hola, $name";
 }); 
 
-Route::get("/journalist", [JournalistController::class, "index"]) -> name('jouranlist');
+Route::get("/journalist", [JournalistController::class, "index"]) -> name('journalist');
 Route::get("/name/{name}", [JournalistController::class, "sayName"]);
 
 //Esto para devolver la vista con el formulario de creación
 //Al darle un nombre a al a ruta, luego la uedo utilizar para referenciarla desde el resto de mi proyecto
-Route::get("/jounalist/create", [JournalistController::class, "create"]) -> name('jounalist.create');
+Route::get("/jounalist/create", [JournalistController::class, "create"]) -> name('journalist.create');
 
 //Esto para guardar el jounalist con los datos rellenados del formulario de creación
-Route::post("/jounalist", [JournalistController::class, "store"]) -> name('jounalist.store');
+Route::post("/jounalist", [JournalistController::class, "store"]) -> name('journalist.store');
 
 Route::get("/journalist/{id}", [JournalistController::class, "show"]);
 

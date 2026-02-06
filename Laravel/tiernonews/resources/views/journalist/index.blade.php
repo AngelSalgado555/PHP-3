@@ -3,39 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Journalists </title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
+    <title> Listado de Periodistas </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
-<body>
+<body class="bg-light">
     @include("components.header");
-        <h1 class="bg-info text-success p-2">Journalist</h1>
-        <p class="bg-info"> Prueba </p>
-        @if (session('deleted'))
-            <div class="alert alert-success" role="alert">
+
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-primary">Periodistas Registrados</h2>
+            <a href="{{ route('journalist.create') }}" class="btn btn-success shadow-sm"> + Nuevo Periodista </a>
+        </div>
+
+        @if(session('deleted'))
+            <div class="alert alert-warning shadow-sm">
                 {{ session('deleted') }}
             </div>
         @endif
-        @foreach ($journalists as $j)
-            <p> Nombre: {{ $j->name }}</p>
-            <p> Apellidos: {{ $j->surname }}</p>
-            <p> Email: {{ $j->email }}</p>
-            <p> Password: {{ $j->password }}</p>
 
-        <div class="container">
-            <div class="row">
-                
+        <div class="row">
+            @foreach ($journalists as $journalist)
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm h-100 border-0">
+                        <div class="card-header bg-primary text-white py-3">
+                            <h5 class="mb-0 text-truncate">{{ $journalist->name }} {{ $journalist->surname }}</h5>
+                        </div>
+                        <div class="card-body p-4">
+                            <p class="mb-1 text-muted"><strong>Email:</strong></p>
+                            <p>{{ $journalist->email }}</p>
+                        </div>
+                        <div class="card-footer bg-white border-top-0 d-flex gap-2 pb-3">
+                            <a href="{{ route('journalist.edit', $journalist->id) }}" class="btn btn-sm btn-outline-secondary flex-grow-1">
+                                Editar
+                            </a>
 
-                <a href="{{ route('journalist.edit', $j -> id) }}"><button  type="button" class="btn btn-primary"> Editar </button></a>
-
-                <form method="post" action="{{ route('journalist.destroy', $j -> id) }}">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger"> Eliminar </button>
-                </form>
-            </div>
+                            <form action="{{ route('journalist.destroy', $journalist->id) }}" method="POST" class="flex-grow-1">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-outline-danger w-100" onclick="return confirm('¿Estás seguro de que deseas eliminar a este periodista?')">
+                                    Eliminar
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
-    @endforeach
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
