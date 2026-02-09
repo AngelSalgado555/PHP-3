@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Journalist;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Log;
 
 class JournalistApiController extends Controller
 {
@@ -23,11 +24,23 @@ class JournalistApiController extends Controller
      */
     public function store(Request $request)
     {
-        $j = new Journalist($request -> all());
-        $j -> save();
+        if (!isset($request -> name)){
+            $errors = true;
+        } else if (!isset($request -> password)){
+            $errros = true;
+        }
 
-        return response()-> json($j);
-    
+        if (!$errors){
+            $j = new Journalist($request -> all());
+            $j -> save();
+
+            return response() -> json($j);
+        } else {
+            return response() -> json([
+                "message" => "error",
+                "data" => null
+            ], JsonResponse::HTTP_NOT_FOUND);
+        }
     }
 
     /**
@@ -95,5 +108,11 @@ class JournalistApiController extends Controller
                 "data" => null
             ], JsonResponse::HTTP_NOT_FOUND); //Esto equivale al error 404 que es no encontrado
         }
+    }
+
+    //Para las búsquedas
+    public function search(Request $request){
+        Log::channel('stderr') -> debug("VARIABLES DE BÚSQUEDA", [$request -> name]);
+        //todo
     }
 }

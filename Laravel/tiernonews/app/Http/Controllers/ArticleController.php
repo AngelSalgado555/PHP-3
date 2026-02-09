@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Journalist;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -12,7 +13,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        return view('article');
+        
     }
 
     /**
@@ -20,7 +22,10 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        //Devolver vista del formulario de creación del artículo
+        $journalists = Journalist::all();
+        
+        return view('article.create', compact('journalist'));
     }
 
     /**

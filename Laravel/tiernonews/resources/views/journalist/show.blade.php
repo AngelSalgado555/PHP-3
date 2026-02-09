@@ -14,5 +14,11 @@
     <p>Email: {{ $journalist->email }}</p>
     <p>Contraseña: {{ $journalist->password }}</p>
     
+    <h3> Artículos escritos por {{ $j -> name }}:</h3>
+    @foreach ($j -> articles as $article)
+        <h4> {{ $article -> title }}</h4>
+        <p> {{ $article -> content }}</p>
+        <p> {{ $article -> readers }}</p>
+    @endforeach
 </body>
 </html>
