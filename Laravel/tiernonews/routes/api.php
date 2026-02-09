@@ -8,6 +8,8 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+Route::get("/search", [JournalistApiController::class, "search"]);
+
 Route::get("/journalist/{id}", [JournalistApiController::class, "show"]);
 
 Route::post("/journalist", [JournalistApiController::class, "store"]);

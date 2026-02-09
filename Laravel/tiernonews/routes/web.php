@@ -42,4 +42,3 @@ Route::resource("/article", ArticleController::class);
 
 Route::get("/article/create", [ArticleController::class, "create"]) -> name('article.create');
 
-Route::get("/journalist/search", [JournalistApiController::class, "search"]);

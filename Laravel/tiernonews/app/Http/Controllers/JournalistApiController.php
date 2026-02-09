@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Journalist;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -114,5 +115,46 @@ class JournalistApiController extends Controller
     public function search(Request $request){
         Log::channel('stderr') -> debug("VARIABLES DE BÚSQUEDA", [$request -> name]);
         //todo
+        //SELECT * FROM journalist WHERE name = ?
+        // if (isset($request -> name)){
+        //     $journalists = Journalist::where('name', $request -> name) -> get();
+        //     return response() -> json($journalists);
+        // }
+
+        // //Buscar por email
+        // if (isset($request -> email)){
+        //     $journalists = Journalist::where('email', $request -> email) -> get();
+        //     return response() -> json($journalists);
+        // }
+
+        // if (isset($request -> minreaders) && isset($request -> maxreaders)){
+        //     //Quiero devolver los artículos que tengan más de minReader readers
+        //     $articles = Article::where("readers", ">=", $request -> minreaders) ->
+        //         where("readers", "<=", $request -> minreaders)-> get();
+        //     return response() -> json($articles);
+        // } else if (isset($request -> minreaders)){
+        //     //Quiero devolver los artículos que tengan más de minReader readers
+        //     $articles = Article::where(
+        //         "readers", ">=", $request -> minreaders
+        //     ) -> get();
+        //     return response() -> json($articles);
+        // }
+
+        //Buscar periodistas por nombre y por email
+        // if (isset($request -> name) && isset($request -> email)){
+        //     $journalists = Journalist::where("name", $request -> name) -> 
+        //     where("email", $request -> email) -> get();
+
+        //     return response() -> json($journalists);
+        // }
+
+        //Buscar periodista por nombre o por apellido
+        if (isset($request -> name) || isset($request -> surname)){
+            $journalists = Journalist::where("name", $request -> name) -> 
+            orwhere("surname", $request -> surname) -> get();
+
+            return response() -> json($journalists);
+        }
+
     }
 }

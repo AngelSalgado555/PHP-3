@@ -18,7 +18,7 @@
                     </div>
 
                     <div class="card-body p-4">
-                        <form action="{{ route('') }}" method="POST">
+                        <form action="{{ route('article.store') }}" method="POST">
                             <div class="mb-3">
                                 <label for="titulo" class="form-label font-weight-bold">Titúlo: </label>
                                 <input type="text" class="form-control" id="titulo">
@@ -30,13 +30,18 @@
                             </div>
 
                             <div class="mb-3">
-                                
+                                <label for="readers" class="form-control"> Readers: </label>
+                                <input type="text" class="form-control" id="readers">
                             </div>
+
+                            <button type="button" class="btn btn-primary"> Crear Artículo </button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
