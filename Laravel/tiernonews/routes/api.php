@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleApiController;
 use App\Http\Controllers\JournalistApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,3 +18,5 @@ Route::post("/journalist", [JournalistApiController::class, "store"]);
 Route::put("/journalist/{id}", [JournalistApiController::class, "update"]);
 
 Route::delete("/journalist/{id}", [JournalistApiController::class, "destroy"]);
+
+Route::delete("/delete", [ArticleApiController::class, "deleteByReaders"]);

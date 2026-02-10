@@ -157,4 +157,6 @@ class JournalistApiController extends Controller
         }
 
     }
+
+    //
 }
