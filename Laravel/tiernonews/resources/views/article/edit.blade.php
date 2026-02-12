@@ -19,6 +19,13 @@
                         <label for="titulo"> Titulo: </label>
                         <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Enter title">
                     </div>
+
+                    <div class="form-group">
+                        <label for="content"> Contenido: </label>
+                        <input type="text" class="form-control" name="content" id="content" placeholder="Introduzca el contenido">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary"> Actualizar </button>
                 </form>
             </div>
         </div>

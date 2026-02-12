@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Journalist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ArticleController extends Controller
 {
@@ -13,7 +14,9 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view('article');
+        $articles = Article::all();
+
+        return view('article.index', compact('articles'));
         
     }
 
@@ -25,7 +28,7 @@ class ArticleController extends Controller
         //Devolver vista del formulario de creación del artículo
         $journalists = Journalist::all();
         
-        return view('article.create', compact('journalist'));
+        return view('article.create', compact('journalists'));
     }
 
     /**
@@ -34,6 +37,23 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         //
+        $a = new Article($request-> all());
+        Log::channel('stderr') -> debug("Variable request: ", [$a -> title]);
+
+        //Antes de guardar en la DB: Validaciones
+        $request -> validate([
+            'title' => 'required',
+            'content' => 'required', 
+            'readers' => 'required', 
+            'journalist_id' => 'required'
+        ]);
+
+
+        //Lo guardamos
+        $a -> save(); 
+
+        return redirect() -> route('article.index');
+
     }
 
     /**
@@ -71,6 +91,14 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        //Eliminar un articulo
+        if ($article == null){
+            $message = "El articulo no existe";
+        } else {
+            $article -> delete(); 
+            $message = "El articulo " . $article -> title . " fue eliminado";
+        }
+
+        return redirect() -> route('article.index') -> with('deleted', $message);
     }
 }

@@ -40,7 +40,13 @@ Route::delete("/journalist/{id}", [JournalistController::class, "destroy"]) -> n
 
 Route::resource("/article", ArticleController::class);
 
+Route::get("/article", [ArticleController::class, "index"]) -> name('article.index');
+
+Route::get("/article/destroy", [ArticleController::class, "destroy"]) -> name('article.destroy');
+
 Route::get("/article/create", [ArticleController::class, "create"]) -> name('article.create');
 
 Route::get("/article/update", [ArticleController::class, "update"]) -> name('article.update');
+
+Route::post("/article/store", [ArticleController::class, "store"]) -> name('article.store');
 

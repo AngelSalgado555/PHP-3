@@ -19,22 +19,35 @@
 
                     <div class="card-body p-4">
                         <form action="{{ route('article.store') }}" method="POST">
+                            @csrf
                             <div class="mb-3">
                                 <label for="titulo" class="form-label font-weight-bold">Titúlo: </label>
-                                <input type="text" class="form-control" id="titulo">
+                                <input type="text" class="form-control" id="titulo" name="title">
                             </div>
 
                             <div class="mb-3">
                                 <label for="content" class="form-label"> Content: </label>
-                                <input type="text" class="form-control" id="content">
+                                <input type="text" class="form-control" id="content" name="content">
                             </div>
 
                             <div class="mb-3">
                                 <label for="readers" class="form-control"> Readers: </label>
-                                <input type="text" class="form-control" id="readers">
+                                <input type="text" class="form-control" id="readers" name="readers">
                             </div>
 
-                            <button type="button" class="btn btn-primary"> Crear Artículo </button>
+                            <div class="mb-3">
+                                <label for="journalist_id" class="form-control"> Journalist ID: </label>
+                                <select name="journalist_id" id="journalist_id">
+                                    <option value=""> Seleccione un autor </option>
+                                    @foreach ($journalists as $j)
+                                        <option value="{{ $j -> id }}"> {{ $j -> name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary"> Crear Artículo </button>
+                            </div>
                         </form>
                     </div>
                 </div>
