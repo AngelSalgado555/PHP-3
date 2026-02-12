@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class ArticleApiController extends Controller
@@ -65,7 +66,31 @@ class ArticleApiController extends Controller
     //Eliminar artículos que tengan entre min y max readers
     //Para eliminar quiero hacer esto : http://127.0.0.1:8000/delete?minReaders=5&maxReaders=9
 
-    public function deleteByReaders(int $minReaders, int $maxReaders, Request $request){
-        
+    public function deleteByReaders(Request $request){
+        //1. compruebo si existen los parámetros de la url: maxReaders es obligatorio, minReaders no.
+        if (isset($request->maxReaders)) {
+            $minReaders = -1;
+            if (isset($request->minReaders)) {
+                $minReaders = $request->minReaders;
+            }
+
+            //2. creo y lanzo la consulta sql con where (primero tengo que hacer un count, luego un delete)
+            $number = Article::where('readers', '>=', $minReaders)
+                ->where('readers', '<=', $request->maxReaders)
+                ->count();
+            Article::where('readers', '>=', $minReaders)
+                ->where('readers', '<=', $request->maxReaders)
+                ->delete();
+
+            //3. devuelvo un json con la cantidad de artículos eliminados en un JSON tipo:
+            /*  {
+                    "message": "deleted",
+                    "data": "3"
+                }  */
+            return response()->json([
+                "message" => "deleted",
+                "data" => $number
+            ]);
+        }
     }
 }
