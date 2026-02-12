@@ -42,6 +42,7 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         //
+        return view('article.show', compact('article'));
     }
 
     /**
@@ -49,7 +50,8 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        //Hacer ahora
+        return view('article.edit', compact('article'));
     }
 
     /**
@@ -57,7 +59,11 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+        //Ya no tengo que buscarlo con el id, ya que este controlador me lo busca en la base de datos automaticamente.
+        $article -> title = $request -> title; 
+        $article -> content = $request -> get('content');
+        $article -> save(); 
+        return redirect() -> route('article.index')-> with('success', 'Se ha actualizado');
     }
 
     /**

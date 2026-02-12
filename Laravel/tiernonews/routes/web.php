@@ -42,3 +42,5 @@ Route::resource("/article", ArticleController::class);
 
 Route::get("/article/create", [ArticleController::class, "create"]) -> name('article.create');
 
+Route::get("/article/update", [ArticleController::class, "update"]) -> name('article.update');
+
