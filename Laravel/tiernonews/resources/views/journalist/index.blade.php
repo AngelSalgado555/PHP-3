@@ -28,10 +28,16 @@
                         <div class="card-header bg-primary text-white py-3">
                             <h5 class="mb-0 text-truncate">{{ $journalist->name }} {{ $journalist->surname }}</h5>
                         </div>
-                        <div class="card-body p-4">
+                        <div class="card-body p-2">
                             <p class="mb-1 text-muted"><strong>Email:</strong></p>
                             <p>{{ $journalist->email }}</p>
                         </div>
+
+                        <div class="card-body p-2">
+                            <p class="mb-1 text-muted"><strong>ID:</strong></p>
+                            <p>{{ $journalist->id }}</p>
+                        </div>
+
                         <div class="card-footer bg-white border-top-0 d-flex gap-2 pb-3">
                             <a href="{{ route('journalist.edit', $journalist->id) }}" class="btn btn-sm btn-outline-secondary flex-grow-1">
                                 Editar

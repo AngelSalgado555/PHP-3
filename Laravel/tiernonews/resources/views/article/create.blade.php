@@ -37,10 +37,10 @@
 
                             <div class="mb-3">
                                 <label for="journalist_id" class="form-control"> Journalist ID: </label>
-                                <select name="journalist_id" id="journalist_id">
+                                <select class="form-select" name="journalist_id" id="journalist_id">
                                     <option value=""> Seleccione un autor </option>
                                     @foreach ($journalists as $j)
-                                        <option value="{{ $j -> id }}"> {{ $j -> name }}</option>
+                                        <option value="{{ $j -> id }}"> {{ $j -> name }}, con el ID {{ $j -> id }}</option>
                                     @endforeach
                                 </select>
                             </div>
